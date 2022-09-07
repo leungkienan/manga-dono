@@ -1,51 +1,53 @@
-import React, { useState } from 'react'
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from 'react-router-dom'
-import Home from './Pages/Home'
-import Results from './Pages/Results'
-import View from './Pages/View'
-import MainNav from './Components/MainNav'
-import { SearchContext } from './Context/search'
-import Search from '@mui/icons-material/Search'
+import { useState, useEffect } from 'react'
+import Header from './Components/Header'
+import Sidebar from './Components/Sidebar'
+import MainContent from './Components/MainContent'
 
 function App() {
-  const [mangaData, setMangaData] = useState([])
-  const [singleData, setSingleData] = useState({})
+  const [mangaList, SetMangaList] = useState([])
+  const [topManga, SetTopManga] = useState([])
+  const [search, SetSearch] = useState('')
 
-  const setData = (data) => {
-    setMangaData(data)
+  const GetTopManga = async () => {
+    const temp = await fetch(`https://api.jikan.moe/v4/top/manga`).then((res) =>
+      res.json()
+    )
+
+    SetTopManga(temp.top.slice(0, 5))
   }
 
-  const setSingle = (data) => {
-    setSingleData(data)
+  const HandleSearch = (e) => {
+    e.preventDefault()
+
+    FetchManga(search)
   }
 
-  const search = (searchTerm) => {
-    return fetch(
-      `https://api.jikan.moe/v4/manga?q=${searchTerm}&limit=20`
+  const FetchManga = async (query) => {
+    const temp = await fetch(
+      // `https://api.jikan.moe/v4/search/manga?q=${query}&order_by=title&sort=asc&limit=10`
+      `https://api.jikan.moe/v4/manga?q=${query}&order_by=title&sort=asc&limit=10`
     ).then((res) => res.json())
+
+    SetMangaList(temp.results)
   }
+
+  useEffect(() => {
+    GetTopManga()
+  }, [])
 
   return (
-    <SearchContext.Provider
-      value={(search, mangaData, setData, singleData, setSingle)}
-    >
-      <Router>
-        <MainNav />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="/results" element={<Results />}></Route>
-            <Route path="/view" element={<View />}></Route>
-            {/* <Navigate to="/" replace={true} /> */}
-          </Routes>
-        </main>
-      </Router>
-    </SearchContext.Provider>
+    <div className="App">
+      <Header />
+      <div className="content-wrap">
+        <Sidebar topManga={topManga} />
+        <MainContent
+          HandleSearch={HandleSearch}
+          search={search}
+          SetSearch={SetSearch}
+          mangaList={mangaList}
+        />
+      </div>
+    </div>
   )
 }
 
