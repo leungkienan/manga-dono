@@ -1,4 +1,3 @@
 # manga-dono
-Phenomenal mango tracker
 
-website built using react & utilising Jikan api
+Website built using react & utilising Jikan api.
