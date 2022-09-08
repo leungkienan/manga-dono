@@ -1,4 +1,8 @@
 # manga-dono
-Phenomenal mango tracker
 
-website built using react & utilising Jikan api
+Manga Database app
+
+Features to add:
+Tracking
+Adding/Removing entries
+
