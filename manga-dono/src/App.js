@@ -9,11 +9,15 @@ function App() {
   const [search, SetSearch] = useState('')
 
   const GetTopManga = async () => {
-    const temp = await fetch(`https://api.jikan.moe/v4/top/manga`).then((res) =>
-      res.json()
-    )
-
-    SetTopManga(temp.top.slice(0, 5))
+    // const temp = await fetch(
+    //   `https://api.jikan.moe/v4/manga?q=naruto&sfw`
+    // ).then((res) => res.json())
+    // SetTopManga(temp.top.slice(0, 5))
+    // const res = await fetch(
+    //   `https://api.jikan.moe/v4/anime?q=naruto&sfw&limit=`
+    // )
+    // const resData = await res.json()
+    // SetTopManga(resData.data)
   }
 
   const HandleSearch = (e) => {
@@ -24,16 +28,16 @@ function App() {
 
   const FetchManga = async (query) => {
     const temp = await fetch(
-      // `https://api.jikan.moe/v4/search/manga?q=${query}&order_by=title&sort=asc&limit=10`
-      `https://api.jikan.moe/v4/manga?q=${query}&order_by=title&sort=asc&limit=10`
-    ).then((res) => res.json())
+      `https://api.jikan.moe/v4/manga?q=${search}&order_by=title&sort=asc&limit=20`
+    )
+    const tempData = await temp.json()
 
-    SetMangaList(temp.results)
+    SetMangaList(tempData.data)
   }
 
   useEffect(() => {
     GetTopManga()
-  }, [])
+  }, [search])
 
   return (
     <div className="App">
