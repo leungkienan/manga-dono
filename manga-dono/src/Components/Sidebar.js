@@ -5,7 +5,7 @@ function Sidebar({ topManga }) {
     <aside>
       <nav>
         <h3>Top Manga</h3>
-        {topManga.map((manga) => (
+        {topManga.map(manga => (
           <a
             href={manga.url}
             target="_blank"
