@@ -18,6 +18,11 @@ header h1 {
 header h1 strong {
   color: #313131;
 }
+
+.button{
+  margin:auto;
+}
+
 .content-wrap {
   display: -webkit-box;
   display: -ms-flexbox;

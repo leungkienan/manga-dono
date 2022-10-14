@@ -12,9 +12,6 @@ function App() {
     const temp = await fetch(`https://api.jikan.moe/v4/top/manga?limit=10`)
     const mangaData = await temp.json()
     SetTopManga(mangaData.data.slice(0, 10))
-
-    // this function is being called everytime i enter a key in the searchbar.
-    // ends up calling the api too many times in a short period
   }
 
   const HandleSearch = (e) => {
@@ -24,10 +21,10 @@ function App() {
 
   const FetchManga = async (search) => {
     const temp = await fetch(
-      `https://api.jikan.moe/v4/manga?q=${search}&sfw&order_by=${search.value}&sort=asc&limit=99`
-    )
+      `https://api.jikan.moe/v4/manga?q=${search}&sfw&limit=99`)
     const tempData = await temp.json()
     SetMangaList(tempData.data)
+    console.log(tempData)
   }
 
   useEffect(() => {
