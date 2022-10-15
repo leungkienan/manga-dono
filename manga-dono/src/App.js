@@ -4,6 +4,18 @@ import Sidebar from './Components/Sidebar'
 import MainContent from './Components/MainContent'
 
 function App() {
+  const [theme, setTheme] = useState('light')
+  const toggleTheme = () => {
+    if(theme==="light"){
+      setTheme('dark')
+    } else {
+      setTheme('light')
+    }
+  }
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
+
   const [mangaList, SetMangaList] = useState([])
   const [topManga, SetTopManga] = useState([])
   const [search, SetSearch] = useState('')
@@ -33,6 +45,9 @@ function App() {
 
   return (
     <div className="App">
+      <div className={`App${theme}`}>
+        <button onClick={toggleTheme}>Toggle Theme</button>
+      </div>
       <Header />
       <div className="content-wrap">
         <Sidebar topManga={topManga} />
