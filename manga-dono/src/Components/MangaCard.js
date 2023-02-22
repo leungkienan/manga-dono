@@ -6,10 +6,10 @@ function MangaCard({ manga }) {
       <a href={manga.url} target="_blank" rel="noreferrer">
         <figure>
           <img src={manga.images.jpg.image_url} alt="Manga Pic" />
-          <button class="button">Add Chapter</button>
         </figure>
         <h3>{manga.title}</h3>
       </a>
+      <button class="button">Add Chapter</button>
     </article>
   )
 }

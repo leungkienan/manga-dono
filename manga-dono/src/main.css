@@ -25,12 +25,23 @@ header h1 {
   font-weight: 400;
   text-align: center;
 }
+.dark header h1 {
+  color: #555;
+}
+
 header h1 strong {
   color: #313131;
 }
 
-.button{
-  margin:auto;
+.dark header h1 strong {
+  color: #cecece;
+}
+
+.button {
+  margin-top: 5vmin;
+  padding: 0.5rem;
+  font-size: 2.5vmin;
+  border-radius: 10%;
 }
 
 .content-wrap {
@@ -54,6 +65,10 @@ header h1 strong {
   font-size: 24px;
   margin-bottom: 16px;
 }
+.dark .content-wrap aside nav h3 {
+  color: #cecece;
+}
+
 .content-wrap aside nav a {
   display: block;
   padding: 8px 16px;

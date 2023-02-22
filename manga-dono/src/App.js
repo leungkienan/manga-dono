@@ -6,15 +6,15 @@ import MainContent from './Components/MainContent'
 function App() {
   const [theme, setTheme] = useState('light')
   const toggleTheme = () => {
-    if(theme==="light"){
+    if (theme === 'light') {
       setTheme('dark')
     } else {
       setTheme('light')
     }
   }
   useEffect(() => {
-    document.body.className = theme;
-  }, [theme]);
+    document.body.className = theme
+  }, [theme])
 
   const [mangaList, SetMangaList] = useState([])
   const [topManga, SetTopManga] = useState([])
@@ -33,7 +33,8 @@ function App() {
 
   const FetchManga = async (search) => {
     const temp = await fetch(
-      `https://api.jikan.moe/v4/manga?q=${search}&sfw&limit=99`)
+      `https://api.jikan.moe/v4/manga?q=${search}&sfw&limit=99`
+    )
     const tempData = await temp.json()
     SetMangaList(tempData.data)
     console.log(tempData)
